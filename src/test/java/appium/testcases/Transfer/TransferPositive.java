@@ -1,4 +1,4 @@
-package appium.testcases.Login;
+package appium.testcases.Transfer;
 
 import appium.pages.HomePage;
 import appium.pages.LandingPage;
@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import appium.pages.LoginPage;
 
-public class LoginPositive
+public class TransferPositive
 {
     protected static AndroidDriver driver;
 
@@ -26,11 +26,7 @@ public class LoginPositive
         capabilities.setCapability("appActivity", "com.synrgy7team4.bankingapps.MainActivity");
 
         driver = new AndroidDriver(capabilities);
-    }
 
-    @Test
-    public static void LoginPositiveTest()
-    {
         LandingPage landingPage = new LandingPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -45,6 +41,12 @@ public class LoginPositive
 
         homePage.ValidatePage();
         Assert.assertEquals(homePage.GetWelcomeText(),"Selamat Datang,");
+    }
+
+    @Test
+    public static void TransferPositiveTest()
+    {
+
     }
 
     @AfterClass

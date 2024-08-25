@@ -1,16 +1,15 @@
 package appium.testcases.Login;
 
-import appium.pages.HomePage;
 import appium.pages.LandingPage;
+import appium.pages.LoginPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import appium.pages.LoginPage;
 
-public class LoginPositive
+public class LoginNegativePassword
 {
     protected static AndroidDriver driver;
 
@@ -29,22 +28,20 @@ public class LoginPositive
     }
 
     @Test
-    public static void LoginPositiveTest()
+    public static void LoginNegativePasswordTest()
     {
         LandingPage landingPage = new LandingPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
 
         landingPage.ValidatePage();
         landingPage.ClickAlreadyHaveAccount();
 
         loginPage.ValidatePage();
         loginPage.InputEmail("dxa0727@gmail.com");
-        loginPage.InputPassword("password123");
+        loginPage.InputPassword("password12345");
         loginPage.ClickLoginButton();
 
-        homePage.ValidatePage();
-        Assert.assertEquals(homePage.GetWelcomeText(),"Selamat Datang,");
+        Assert.assertEquals(loginPage.ErrorPasswordMessageText(),"Invalid password");
     }
 
     @AfterClass

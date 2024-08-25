@@ -8,12 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.openqa.selenium.By.xpath;
+
 public class HomePage
 {
     AndroidDriver driver;
     WebDriverWait wait;
 
-    By dashboardText = By.xpath("//*[@text='PRODUCTS']");
+    By welcomeText = xpath("//android.widget.TextView[@resource-id=\"com.synrgy7team4.bankingapps.debug:id/tv_good_morning\"]");
 
     public HomePage(AndroidDriver driver)
     {
@@ -21,9 +23,14 @@ public class HomePage
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    public String GetDashboardText()
+    public void ValidatePage()
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardText));
-        return driver.findElement(dashboardText).getText();
+        wait.until(ExpectedConditions.presenceOfElementLocated(xpath("//android.view.ViewGroup[@resource-id=\"com.synrgy7team4.bankingapps.debug:id/acc_layout\"]")));
+    }
+
+    public String GetWelcomeText()
+    {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeText));
+        return driver.findElement(welcomeText).getText();
     }
 }
