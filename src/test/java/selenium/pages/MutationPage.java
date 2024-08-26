@@ -2,6 +2,7 @@ package selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static org.openqa.selenium.By.*;
 
@@ -11,12 +12,20 @@ public class MutationPage
 
     By mutationText = xpath("//*[@id=\"root\"]/main/h1");
     By typeofTransactionButton = xpath("//*[@id=\"jenisTransaksi\"]");
+    By selectTransactionAll = xpath("//*[@id=\"jenisTransaksi\"]/option[1]");
     By selectTransactionIn = xpath("//*[@id=\"jenisTransaksi\"]/option[2]");
     By selectTransactionOut = xpath("//*[@id=\"jenisTransaksi\"]/option[3]");
-    By fromDateInput = xpath("//*[@id=\"dariTanggal\"]");
-    By toDateInput = xpath("//*[@id=\"sampaiTanggal\"]");
+    By fromDateInput = xpath("//*[@id=\"root\"]/main/div[1]/form/div[2]/div/button");
+    By toDateInput = xpath("//*[@id=\"root\"]/main/div[1]/form/div[3]/div/button");
+    By twentyDateInput = xpath("//*[@id=\":r2:\"]/div/div/div/table/tbody/tr[4]/td[3]/button");
+    By twentyThreeDateInput = xpath("//*[@id=\":r0:\"]/div/div/div/table/tbody/tr[4]/td[6]/button");
+    By twentyFiveDateInput = xpath("//*[@id=\":r2:\"]/div/div/div/table/tbody/tr[5]/td[1]/button");
     By findMutationButton = xpath("//*[@id=\"btnMutasi\"]");
-    By errorMessage = xpath("");
+    By firstMutationData = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[1]/td[5]/span");
+    By secondMutationData = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[2]/td[5]/span");
+    By getSecondDate = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[2]/td[1]");
+    By getThirdDate = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[3]/td[1]");
+    By errorMessage = xpath("//*[@id=\"root\"]/div[2]/div/div");
 
     public MutationPage(WebDriver driver)
     {
@@ -33,14 +42,15 @@ public class MutationPage
         driver.findElement(mutationText).isDisplayed();
     }
 
-    public void DropdownTransactionIsDisplayed()
-    {
-        driver.findElement(typeofTransactionButton).isDisplayed();
-    }
-
     public void ClickDropdownTransaction()
     {
+        driver.findElement(typeofTransactionButton).isDisplayed();
         driver.findElement(typeofTransactionButton).click();
+    }
+
+    public void ClickAllTransaction()
+    {
+        driver.findElement(selectTransactionAll).click();
     }
 
     public void ClickIncomeTransaction()
@@ -53,43 +63,75 @@ public class MutationPage
         driver.findElement(selectTransactionOut).click();
     }
 
-    public void FromDateInputIsDisplayed()
+    public void InputFromTwentyThreeDate ()
     {
         driver.findElement(fromDateInput).isDisplayed();
+        driver.findElement(fromDateInput).click();
+        driver.findElement(twentyThreeDateInput).isDisplayed();
+        driver.findElement(twentyThreeDateInput).click();
     }
 
-    public void InputFromDate (String fromDate)
-    {
-        driver.findElement(fromDateInput).sendKeys(fromDate);
-    }
-
-    public void ToDateInputIsDisplayed()
+    public void InputToTwentyDate ()
     {
         driver.findElement(toDateInput).isDisplayed();
+        driver.findElement(toDateInput).click();
+        driver.findElement(twentyDateInput).isDisplayed();
+        driver.findElement(twentyDateInput).click();
     }
 
-    public void InputToDate (String toDate)
+    public void InputToTwentyFiveDate ()
     {
-        driver.findElement(toDateInput).sendKeys(toDate);
-    }
-
-    public void FindMutationButtonIsDisplayed()
-    {
-        driver.findElement(findMutationButton).isDisplayed();
+        driver.findElement(toDateInput).isDisplayed();
+        driver.findElement(toDateInput).click();
+        driver.findElement(twentyFiveDateInput).isDisplayed();
+        driver.findElement(twentyFiveDateInput).click();
     }
 
     public void ClickFindMutationButton()
     {
+        driver.findElement(findMutationButton).isDisplayed();
         driver.findElement(findMutationButton).click();
     }
 
-    public void ErrorMessageIsDisplayed()
+    public String GetFirstMutationData()
     {
-        driver.findElement(errorMessage).isDisplayed();
+        WebElement element = driver.findElement(firstMutationData);
+
+        String elementText = element.getText();
+        String data = elementText.substring(0, 1);
+        return data;
+    }
+
+    public String GetSecondMutationData()
+    {
+        WebElement element = driver.findElement(secondMutationData);
+
+        String elementText = element.getText();
+        String data = elementText.substring(0, 1);
+        return data;
+    }
+
+    public String GetSecondDate()
+    {
+        WebElement element = driver.findElement(getSecondDate);
+
+        String elementText = element.getText();
+        String date = elementText.substring(0, 2);
+        return date;
+    }
+
+    public String GetThirdDate()
+    {
+        WebElement element = driver.findElement(getThirdDate);
+
+        String elementText = element.getText();
+        String date = elementText.substring(0, 2);
+        return date;
     }
 
     public String ErrorGetText()
     {
+        driver.findElement(errorMessage).isDisplayed();
         return driver.findElement(errorMessage).getText();
     }
 }

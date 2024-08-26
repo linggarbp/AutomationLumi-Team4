@@ -1,4 +1,4 @@
-package selenium.testcases.Mutation;
+package selenium.testcases.QRIS;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -10,18 +10,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.pages.HomePage;
 import selenium.pages.LoginPage;
-import selenium.pages.MutationPage;
+import selenium.pages.QRISPage;
 
 import java.time.Duration;
 
 import static org.openqa.selenium.By.xpath;
 
-public class MutationDatePositive
+public class QRISPositive
 {
     WebDriver driver;
 
     @BeforeClass
-    public void SetUp() {
+    public void SetUp()
+    {
         driver = WebDriverManager.chromedriver().create();
         driver.manage().window().maximize();
         driver.get("https://lumibank.netlify.app/login");
@@ -31,7 +32,7 @@ public class MutationDatePositive
         HomePage homePage = new HomePage(driver);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"email\"]")));
-        Assert.assertEquals(loginPage.GetCurrentURL(), "https://lumibank.netlify.app/login");
+        Assert.assertEquals(loginPage.GetCurrentURL(),"https://lumibank.netlify.app/login");
         loginPage.EmailFieldIsDisplayed();
         loginPage.PasswordFieldIsDisplayed();
         loginPage.LoginButtonIsDisplayed();
@@ -39,26 +40,22 @@ public class MutationDatePositive
         loginPage.InputPassword("password123");
         loginPage.ClickLoginButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/header/div[1]/a/div/img")));
-        Assert.assertEquals(homePage.GetCurrentURL(), "https://lumibank.netlify.app/dashboard");
+        Assert.assertEquals(homePage.GetCurrentURL(),"https://lumibank.netlify.app/dashboard");
         homePage.LumiLogoIsDisplayed();
-        homePage.ClickMutationButton();
+        homePage.ClickQRISButton();
     }
 
     @Test
-    public void MutationAllTest()
+    public void LoginTest()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        MutationPage mutationPage = new MutationPage(driver);
+        QRISPage qrisPage = new QRISPage(driver);
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/main/h1")));
-        Assert.assertEquals(mutationPage.GetCurrentURL(), "https://lumibank.netlify.app/mutasi");
-        mutationPage.MutationTextIsDisplayed();
-        mutationPage.ClickDropdownTransaction();
-        mutationPage.ClickAllTransaction();
-        mutationPage.InputFromTwentyThreeDate();
-        mutationPage.InputToTwentyFiveDate();
-        mutationPage.ClickFindMutationButton();
-        Assert.assertTrue(Float.parseFloat(mutationPage.GetThirdDate()) > Float.parseFloat(mutationPage.GetSecondDate()));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/p[2]")));
+        Assert.assertEquals(qrisPage.GetCurrentURL(),"https://lumibank.netlify.app/qris");
+        qrisPage.GetAllQRISElement();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/main/div/div[3]/img")));
+
     }
 
     @AfterClass
