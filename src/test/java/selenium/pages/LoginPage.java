@@ -27,43 +27,27 @@ public class LoginPage
         return driver.getCurrentUrl();
     }
 
-    public void EmailFieldIsDisplayed()
-    {
-        driver.findElement(emailField).isDisplayed();
-    }
-
-    public void PasswordFieldIsDisplayed()
-    {
-        driver.findElement(passwordField).isDisplayed();
-    }
-
-    public void LoginButtonIsDisplayed()
-    {
-        driver.findElement(loginButton).isDisplayed();
-    }
-
     public void InputEmail(String email)
     {
+        driver.findElement(emailField).isDisplayed();
         driver.findElement(emailField).sendKeys(email);
     }
 
     public void InputPassword(String password)
     {
+        driver.findElement(passwordField).isDisplayed();
         driver.findElement(passwordField).sendKeys(password);
     }
 
     public void ClickLoginButton()
     {
+        driver.findElement(loginButton).isDisplayed();
         driver.findElement(loginButton).click();
     }
 
-    public void ErrorMessageIsDisplayed()
+    public String GetErrorMessage()
     {
         driver.findElement(errorMessage).isDisplayed();
-    }
-
-    public String ErrorGetText()
-    {
         return driver.findElement(errorMessage).getText();
     }
 }

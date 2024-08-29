@@ -1,7 +1,9 @@
 package appium.pages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,10 +25,11 @@ public class MutationPage
     By textTransactionOut = xpath("(//android.widget.TextView[@content-desc=\"Rupiah\"])[2]");
     By fromDateInput = xpath("(//android.widget.ImageButton[@content-desc=\"Pilih tanggal\"])[1]");
     By startDateInput = xpath("//android.widget.TextView[@content-desc=\"Tuesday, August 20\"]");
+    By startDateInputFalse = xpath("//android.widget.TextView[@content-desc=\"Friday, August 30\"]");
     By okayStartDateButton = xpath("//android.widget.Button[@resource-id=\"com.synrgy7team4.bankingapps.debug:id/confirm_button\"]");
     By toDateInput = xpath("(//android.widget.ImageButton[@content-desc=\"Pilih tanggal\"])[2]");
-    By endDateInput = xpath("//android.widget.TextView[@content-desc=\"Today Sunday, August 25\"]");
     By okayEndDateButton = xpath("//android.widget.Button[@resource-id=\"com.synrgy7team4.bankingapps.debug:id/confirm_button\"]");
+    By getTextDate = xpath("//androidx.recyclerview.widget.RecyclerView[@content-desc=\"Daftar riwayat mutasi\"]");
 
     public MutationPage(AndroidDriver driver)
     {
@@ -37,6 +40,16 @@ public class MutationPage
     public void ValidatePage()
     {
         wait.until(ExpectedConditions.presenceOfElementLocated(mutationText));
+    }
+
+    public boolean GetTextDate()
+    {
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(getTextDate));
+        }catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public void ClickDropdownTransaction()
@@ -64,7 +77,7 @@ public class MutationPage
         driver.findElement(selectTransactionOut).click();
     }
 
-    public void InputFromDate ()
+    public void InputFromDateTrue ()
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fromDateInput));
         driver.findElement(fromDateInput).click();
@@ -73,24 +86,41 @@ public class MutationPage
         driver.findElement(okayStartDateButton).click();
     }
 
+    public void InputFromDateFalse ()
+    {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fromDateInput));
+        driver.findElement(fromDateInput).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(startDateInputFalse));
+        driver.findElement(startDateInputFalse).click();
+        driver.findElement(okayStartDateButton).click();
+    }
+
     public void InputToDate ()
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(toDateInput));
         driver.findElement(toDateInput).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(endDateInput));
-        driver.findElement(endDateInput).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(okayEndDateButton));
+//        driver.findElement(endDateInput).click();
         driver.findElement(okayEndDateButton).click();
     }
 
     public String GetIncomeText()
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(textTransactionIn));
-        return driver.findElement(textTransactionIn).getText();
+        WebElement element = driver.findElement(textTransactionIn);
+
+        String elementText = element.getText();
+        String data = elementText.substring(0, 1);
+        return data;
     }
 
     public String GetOutcomeText()
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(textTransactionOut));
-        return driver.findElement(textTransactionOut).getText();
+        WebElement element = driver.findElement(textTransactionOut);
+
+        String elementText = element.getText();
+        String data = elementText.substring(0, 1);
+        return data;
     }
 }

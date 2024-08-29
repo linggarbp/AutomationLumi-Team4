@@ -23,8 +23,9 @@ public class MutationPage
     By findMutationButton = xpath("//*[@id=\"btnMutasi\"]");
     By firstMutationData = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[1]/td[5]/span");
     By secondMutationData = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[2]/td[5]/span");
-    By getSecondDate = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[2]/td[1]");
+    By getFirstDate = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[1]/td[1]");
     By getThirdDate = xpath("//*[@id=\"root\"]/main/div[2]/div/table/tbody/tr[3]/td[1]");
+    By sortingDate = xpath("//*[@id=\"root\"]/main/div[2]/div/table/thead/tr/th[1]");
     By errorMessage = xpath("//*[@id=\"root\"]/div[2]/div/div");
 
     public MutationPage(WebDriver driver)
@@ -111,9 +112,9 @@ public class MutationPage
         return data;
     }
 
-    public String GetSecondDate()
+    public String GetFirstDate()
     {
-        WebElement element = driver.findElement(getSecondDate);
+        WebElement element = driver.findElement(getFirstDate);
 
         String elementText = element.getText();
         String date = elementText.substring(0, 2);
@@ -127,6 +128,12 @@ public class MutationPage
         String elementText = element.getText();
         String date = elementText.substring(0, 2);
         return date;
+    }
+
+    public void SortingDate()
+    {
+        driver.findElement(sortingDate).isDisplayed();
+        driver.findElement(sortingDate).click();
     }
 
     public String ErrorGetText()

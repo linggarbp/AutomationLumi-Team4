@@ -46,15 +46,16 @@ public class MutationDatePositive
     }
 
     @Test
-    public static void MutationAllTest()
+    public static void MutationDatePositiveTest()
     {
         MutationPage mutationPage = new MutationPage(driver);
 
         mutationPage.ValidatePage();
         mutationPage.ClickDropdownTransaction();
         mutationPage.ClickAllTransaction();
-        mutationPage.InputFromDate();
+        mutationPage.InputFromDateTrue();
         mutationPage.InputToDate();
+        Assert.assertTrue(mutationPage.GetTextDate());
     }
 
     @AfterClass

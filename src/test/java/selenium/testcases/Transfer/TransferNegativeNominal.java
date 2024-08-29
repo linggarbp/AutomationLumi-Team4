@@ -33,9 +33,6 @@ public class TransferNegativeNominal
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"email\"]")));
         Assert.assertEquals(loginPage.GetCurrentURL(),"https://lumibank.netlify.app/login");
-        loginPage.EmailFieldIsDisplayed();
-        loginPage.PasswordFieldIsDisplayed();
-        loginPage.LoginButtonIsDisplayed();
         loginPage.InputEmail("dxa0727@gmail.com");
         loginPage.InputPassword("password123");
         loginPage.ClickLoginButton();
@@ -54,13 +51,8 @@ public class TransferNegativeNominal
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/main/h1")));
         Assert.assertEquals(transferPage.GetCurrentURL(),"https://lumibank.netlify.app/transfer");
         transferPage.TransferTextIsDisplayed();
-        transferPage.DestinationAccountIsDisplayed();
-        transferPage.SelectBankIsDisplayed();
-        transferPage.DescFieldIsDisplayed();
-        transferPage.AmountFieldIsDisplayed();
         transferPage.NextButtonIsDisplayed();
         transferPage.InputDestinationAccount("7434907276");
-        transferPage.ClickDropdownBank();
         transferPage.ClickSelectBankBCA();
         transferPage.InputNominal("100");
         transferPage.InputDesc("Transfer 100");

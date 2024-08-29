@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.pages.HomePage;
+import selenium.pages.LandingPage;
 import selenium.pages.LoginPage;
 
 import java.time.Duration;
@@ -24,7 +25,15 @@ public class LoginNegativePassword
     {
         driver = WebDriverManager.chromedriver().create();
         driver.manage().window().maximize();
-        driver.get("https://lumibank.netlify.app/login");
+        driver.get("https://lumibank.netlify.app/");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        LandingPage landingPage = new LandingPage(driver);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/header/a/img")));
+        Assert.assertEquals(landingPage.GetCurrentURL(), "https://lumibank.netlify.app/");
+        landingPage.LumiTextIsDisplayed();
+        landingPage.ClickJoinButton();
     }
 
     @Test
@@ -35,15 +44,11 @@ public class LoginNegativePassword
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"email\"]")));
         Assert.assertEquals(loginPage.GetCurrentURL(),"https://lumibank.netlify.app/login");
-        loginPage.EmailFieldIsDisplayed();
-        loginPage.PasswordFieldIsDisplayed();
-        loginPage.LoginButtonIsDisplayed();
         loginPage.InputEmail("dxa072727@gmail.com");
         loginPage.InputPassword("password12345");
         loginPage.ClickLoginButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/div[2]/div/div")));
-        loginPage.ErrorMessageIsDisplayed();
-        Assert.assertEquals(loginPage.ErrorGetText(),"Email atau Password Salah");
+        Assert.assertEquals(loginPage.GetErrorMessage(),"Email atau Password Salah");
     }
 
     @AfterClass

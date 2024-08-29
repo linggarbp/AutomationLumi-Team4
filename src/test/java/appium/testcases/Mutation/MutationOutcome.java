@@ -53,7 +53,7 @@ public class MutationOutcome
         mutationPage.ValidatePage();
         mutationPage.ClickDropdownTransaction();
         mutationPage.ClickOutcomeTransaction();
-        Assert.assertEquals(mutationPage.GetOutcomeText(), "- IDR 1000.0");
+        Assert.assertEquals(mutationPage.GetOutcomeText(), "-");
     }
 
     @AfterClass

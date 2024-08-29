@@ -10,13 +10,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.pages.HomePage;
 import selenium.pages.LoginPage;
+import selenium.pages.PinPage;
 import selenium.pages.TransferPage;
 
 import java.time.Duration;
 
 import static org.openqa.selenium.By.xpath;
 
-public class TransferNegativeNumberAccount
+public class TransferPositivePending
 {
     WebDriver driver;
 
@@ -43,24 +44,33 @@ public class TransferNegativeNumberAccount
     }
 
     @Test
-    public void TranferNegativeNumberAccountTest()
+    public void TranferPositivePendingTest()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         TransferPage transferPage = new TransferPage(driver);
+        PinPage pinPage = new PinPage(driver);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/main/h1")));
         Assert.assertEquals(transferPage.GetCurrentURL(),"https://lumibank.netlify.app/transfer");
         transferPage.TransferTextIsDisplayed();
         transferPage.NextButtonIsDisplayed();
-        transferPage.InputDestinationAccount("74349072761");
+        transferPage.InputDestinationAccount("7434907276");
         transferPage.ClickSelectBankBCA();
+        transferPage.ClickSelectDate();
         transferPage.InputNominal("1000");
         transferPage.InputDesc("Transfer 1000");
         transferPage.ClickNextButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"pin\"]")));
+        Assert.assertEquals(pinPage.GetCurrentURL(),"https://lumibank.netlify.app/transfer/input-pin");
+        pinPage.InputPinFieldDisplayed("123456");
+        pinPage.ClickTransferButton();
+        Assert.assertEquals(pinPage.GetCurrentURL(),"https://lumibank.netlify.app/transfer/input-pin");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/div[2]/div/div/div/h1")));
+        pinPage.SuccessMessageIsDisplayed();
+        Assert.assertEquals(pinPage.SuccessGetText(),"Transfer Berhasil");
+        pinPage.ClickOkeyButtonDisplayed();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/main/h1")));
         Assert.assertEquals(transferPage.GetCurrentURL(),"https://lumibank.netlify.app/transfer");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/div[2]/div/div")));
-        transferPage.ErrorMessageIsDisplayed();
-        Assert.assertEquals(transferPage.ErrorGetText(),"Nomor Rekening Tujuan Tidak Valid");
     }
 
     @AfterClass

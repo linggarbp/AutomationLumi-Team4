@@ -15,6 +15,8 @@ public class TransferPage
     By selectBankBCA = xpath("//*[@id=\"bankTo\"]/option[2]");
     By descField = xpath("//*[@id=\"description\"]");
     By amountField = xpath("//*[@id=\"amount\"]");
+    By selectDate = xpath("");
+    By inputDate = xpath("");
     By nextButton = xpath("//*[@id=\"btnLanjut\"]");
     By errorMessage = xpath("//*[@id=\"root\"]/div[2]/div/div");
 
@@ -33,54 +35,41 @@ public class TransferPage
         driver.findElement(transferText).isDisplayed();
     }
 
-    public void DestinationAccountIsDisplayed()
-    {
-        driver.findElement(destinationAccountField).isDisplayed();
-    }
-
     public void InputDestinationAccount(String number)
     {
+        driver.findElement(destinationAccountField).isDisplayed();
         driver.findElement(destinationAccountField).sendKeys(number);
-    }
-
-    public void SelectBankIsDisplayed()
-    {
-        driver.findElement(selectBankButton).isDisplayed();
-    }
-
-    public void ClickDropdownBank()
-    {
-        driver.findElement(selectBankButton).click();
     }
 
     public void ClickSelectBankBCA()
     {
+        driver.findElement(selectBankButton).isDisplayed();
+        driver.findElement(selectBankButton).click();
         driver.findElement(selectBankBCA).click();
-    }
-
-    public void DescFieldIsDisplayed()
-    {
-        driver.findElement(descField).isDisplayed();
     }
 
     public void InputDesc(String text)
     {
+        driver.findElement(descField).isDisplayed();
         driver.findElement(descField).sendKeys(text);
-    }
-
-    public void AmountFieldIsDisplayed()
-    {
-        driver.findElement(amountField).isDisplayed();
     }
 
     public void InputNominal(String nominal)
     {
+        driver.findElement(amountField).isDisplayed();
         driver.findElement(amountField).sendKeys(nominal);
     }
 
     public void NextButtonIsDisplayed()
     {
         driver.findElement(nextButton).isDisplayed();
+    }
+
+    public void ClickSelectDate()
+    {
+        driver.findElement(selectDate).isDisplayed();
+        driver.findElement(selectDate).click();
+        driver.findElement(inputDate).click();
     }
 
     public void ClickNextButton()

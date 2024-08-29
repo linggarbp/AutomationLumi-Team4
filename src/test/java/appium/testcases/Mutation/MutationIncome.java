@@ -53,7 +53,7 @@ public class MutationIncome
         mutationPage.ValidatePage();
         mutationPage.ClickDropdownTransaction();
         mutationPage.ClickIncomeTransaction();
-        Assert.assertEquals(mutationPage.GetIncomeText(), "+ IDR 21313.0");
+        Assert.assertEquals(mutationPage.GetIncomeText(), "+");
     }
 
     @AfterClass

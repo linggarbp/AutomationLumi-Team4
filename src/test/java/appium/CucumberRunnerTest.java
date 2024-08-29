@@ -8,8 +8,8 @@ import io.cucumber.testng.CucumberOptions;
         glue = {"appium"},
         plugin = {
                 "pretty",
-                "html:target/report-cucumber.html",
-                "json:target/cucumber-json.json"
+                "html:target/mob-report/report-cucumber.html",
+                "json:target/mob-report/cucumber-json.json"
         }
 )
 public class CucumberRunnerTest extends AbstractTestNGCucumberTests {}

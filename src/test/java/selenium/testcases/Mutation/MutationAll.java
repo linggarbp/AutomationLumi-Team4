@@ -32,11 +32,8 @@ public class MutationAll
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"email\"]")));
         Assert.assertEquals(loginPage.GetCurrentURL(), "https://lumibank.netlify.app/login");
-        loginPage.EmailFieldIsDisplayed();
-        loginPage.PasswordFieldIsDisplayed();
-        loginPage.LoginButtonIsDisplayed();
         loginPage.InputEmail("dxa0727@gmail.com");
-        loginPage.InputPassword("password123");
+        loginPage.InputPassword("password1234");
         loginPage.ClickLoginButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(xpath("//*[@id=\"root\"]/header/div[1]/a/div/img")));
         Assert.assertEquals(homePage.GetCurrentURL(), "https://lumibank.netlify.app/dashboard");

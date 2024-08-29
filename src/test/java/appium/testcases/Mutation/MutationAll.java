@@ -53,6 +53,7 @@ public class MutationAll
         mutationPage.ValidatePage();
         mutationPage.ClickDropdownTransaction();
         mutationPage.ClickAllTransaction();
+        Assert.assertTrue(mutationPage.GetTextDate());
     }
 
     @AfterClass

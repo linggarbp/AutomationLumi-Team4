@@ -27,13 +27,9 @@ public class LandingPage
         driver.findElement(lumiText).isDisplayed();
     }
 
-    public void JoinButtonIsDisplayed()
-    {
-        driver.findElement(joinButton).isDisplayed();
-    }
-
     public void ClickJoinButton()
     {
+        driver.findElement(joinButton).isDisplayed();
         driver.findElement(joinButton).click();
     }
 
