@@ -1,17 +1,17 @@
-package appium.testcases.Transfer;
+package appium.testcases.QRIS;
 
 import appium.pages.HomePage;
 import appium.pages.LandingPage;
-import appium.pages.TransferPage;
+import appium.pages.LoginPage;
+import appium.pages.QRISPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import appium.pages.LoginPage;
 
-public class TransferPositive
+public class QRISPositive
 {
     protected static AndroidDriver driver;
 
@@ -45,11 +45,13 @@ public class TransferPositive
     }
 
     @Test
-    public static void TransferPositiveTest()
+    public static void QRISPositiveTest()
     {
-        TransferPage transferPage = new TransferPage(driver);
+        QRISPage qrisPage = new QRISPage(driver);
 
-        transferPage.SelectAccounDestination();
+        qrisPage.ValidatePage();
+        qrisPage.ClickQRISButton();
+        Assert.assertEquals(qrisPage.GetQRISText(), "QR");
     }
 
     @AfterClass
